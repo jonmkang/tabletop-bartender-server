@@ -29,7 +29,6 @@ cocktailsRouter
         cocktailToAdd.recipe = xss(recipe);
         cocktailToAdd.image = xss(image);
         cocktailToAdd.flavor = flavor;
-        console.log(cocktailToAdd)
 
         return res.status(201)
     })

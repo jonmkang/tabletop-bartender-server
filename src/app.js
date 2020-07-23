@@ -5,12 +5,12 @@ const cors = require('cors')
 const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const e = require('express')
+
 const cocktailsRouter = require('./cocktails/cocktails-router')
-const CocktailService = require('./cocktails/cocktails-service')
-const IngredientsService = require('./ingredients/ingredients-service')
 const ingredientsRouter = require('./ingredients/ingredients-router')
 const flavorsRouter = require('./flavors/flavors-router')
-const FlavorsService = require('./flavors/flavors-service')
+const usersRouter = require('./users/users-router')
+const authRouter = require('./auth/auth-router')
 
 const app = express()
 
@@ -30,6 +30,8 @@ app.get('/', (req, res) => {
 app.use('/api/cocktails', cocktailsRouter)
 app.use('/api/ingredients', ingredientsRouter)
 app.use('/api/flavors', flavorsRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/auth', authRouter)
 
 app.use(function errorHandler(error, req, res, next) {
     let response;

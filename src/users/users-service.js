@@ -18,27 +18,32 @@ const UsersService = {
             return 'Password must contain 1 upper case, lower case, number and special character'
         }
         return null
-
     },
-    hasUserWithUserName(db, user_name) {
-        return db('thingful_users')
-            .where({ user_name })
+    validateEmail(email){
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+            return null
+        }
+        return "Email must be valid"
+    },
+    hasUserWithUserName(db, user_email) {
+        return db('users')
+            .where({ user_email })
             .first()
             .then( user => !! user)
     },
     insertUser(db, newUser) {
         return db
             .insert(newUser)
-            .into('thingful_users')
+            .into('users')
             .returning('*')
             .then(([user]) => user)
     },
     serializeUser(user){
         return {
             id: user.id,
-            full_name: xss(user.full_name),
-            user_name: xss(user.user_name),
-            nickname: xss(user.nick_name),
+            first_name: xss(user.first_name),
+            last_name: xss(user.last_name),
+            user_email: xss(user.user_email),
             date_created: new Date(user.date_created)
         }
     },

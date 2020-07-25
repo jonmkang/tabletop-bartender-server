@@ -7,7 +7,7 @@ const CocktailsService = {
             .select('*')
             .from('cocktails')
     },
-    insertCocktail(db, newBookmark){
+    insertCocktail(db, newCocktail){
         return db
             .insert(newCocktail)
             .into('cocktails')
@@ -15,6 +15,21 @@ const CocktailsService = {
             .then(rows=> {
                 return rows[0]
             })
+    },
+    serializeCocktail(cocktail){
+        return {
+            id: cocktail.id,
+            title: cocktail.title,
+            recipe: cocktail.recipe,
+            image: cocktail.image,
+            ingredient1: cocktail.ingredient1,
+            ingredient2: cocktail.ingredient2,
+            ingredient3: cocktail.ingredient3,
+            ingredient4: cocktail.ingredient4,
+            ingredient5: cocktail.ingredient5,
+            ingredient6: cocktail.ingredient6,
+            flavor: cocktail.flavor
+        }
     }
 }
 

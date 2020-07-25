@@ -3,6 +3,7 @@ const path = require('path')
 const CocktailsService = require('./cocktails-service')
 const cocktailsRouter = express.Router()
 const app = require('../app')
+const { requireAuth } = require('../middleware/jwt-auth')
 const bodyParser = express.json();
 const xss = require('xss')
 
@@ -18,6 +19,9 @@ cocktailsRouter
             .catch(next)
     })
     .post(bodyParser, (req, res) => {
+        if(!requireAuth){
+            return
+        }
         const db = req.app.get('db')
         const { title, ingredients, recipe, image, flavor } = req.body;
         const cocktailToAdd = { title: ''};
@@ -30,6 +34,15 @@ cocktailsRouter
         cocktailToAdd.image = xss(image);
         cocktailToAdd.flavor = flavor;
 
+        CocktailsService.insertCocktail(
+            db,
+            cocktailToAdd
+        )
+            .then(cocktail => {
+                res
+                    .status(201)
+                    .json(CocktailsService.serializeCocktail(cocktail))
+            })
         return res.status(201)
     })
 

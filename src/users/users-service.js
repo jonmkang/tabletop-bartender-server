@@ -42,7 +42,6 @@ const UsersService = {
         return {
             id: user.id,
             first_name: xss(user.first_name),
-            last_name: xss(user.last_name),
             user_email: xss(user.user_email),
             date_created: new Date(user.date_created)
         }

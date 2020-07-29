@@ -46,7 +46,7 @@ describe('Ingredients Endpoints', function() {
             it('GET /ingredients responds with 200 and all of the ingredients', () => {
                 return supertest(app)
                     .get('/api/ingredients')
-                    .expect(200, testingredients) 
+                    .expect(200, testIngredients) 
             })
         })
     })

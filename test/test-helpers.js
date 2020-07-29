@@ -1,3 +1,6 @@
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+
 function makeIngredientsArray() {
     return [
         {
@@ -79,6 +82,21 @@ function makeCocktailsArray(ingredients) {
     ];
 }
 
+function makeUsersArray(){
+    return [
+        {
+            user_email: 'user1@gmail.com',
+            first_name: 'User One',
+            password: 'Abcd1234!'
+        },
+        {
+            first_name: 'User Two',
+            user_email: 'user2@gmail.com',
+            password: 'aBcd1234!'
+        }
+    ]
+}
+
 function makeCocktailsFixtures(){
     const testIngredients = makeIngredientsArray()
     const testCocktails = makeCocktailsArray(testIngredients)
@@ -86,10 +104,11 @@ function makeCocktailsFixtures(){
     return { testIngredients, testCocktails }
 }
 
-function seedTables(db, ingredients, cocktails){
+function seedTables(db, ingredients, cocktails, users){
     return db.transaction( async trx => {
         await trx.into('ingredients').insert(ingredients)
         await trx.into('cocktails').insert(cocktails)
+        await trx.into('users').insert(users)
     })
         .catch()
 }
@@ -99,16 +118,36 @@ function cleanTables(db){
         `TRUNCATE
             cocktails,
             ingredients,
-            flavor_profile
-            
+            flavor_profile,
+            users
             RESTART IDENTITY CASCADE;`
     )
 }
 
+function seedUsers(db, users) {
+    const preppedUsers = users.map(user => ({
+        ...user,
+        password: bcrypt.hashSync(user.password, 12)
+    }))
+    return db.into('users').insert(preppedUsers)
+        .catch()
+}
+
+function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
+    const token = jwt.sign({ user_id: user.id }, secret, {
+          subject: user.user_name,
+           algorithm: 'HS256',
+         })
+    return `Bearer ${token}`
+  }
+
 module.exports = {
     makeCocktailsArray,
     makeIngredientsArray,
+    makeUsersArray,
+    makeAuthHeader,
     makeCocktailsFixtures,
     cleanTables,
-    seedTables
+    seedTables,
+    seedUsers
 }

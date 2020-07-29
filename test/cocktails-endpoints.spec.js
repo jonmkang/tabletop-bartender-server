@@ -28,7 +28,7 @@ describe('Cocktails Endpoints', function() {
 
     afterEach('cleanup', () => helpers.cleanTables(db));
 
-    describe.only(`GET /cocktails`, () => {
+    describe(`GET /cocktails`, () => {
         context('Given there are cocktails in the database', () => {
             
 

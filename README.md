@@ -1,23 +1,29 @@
-# Express Boilerplate!
+# Tabletop Bartender Server
 
-This is a boilerplate project used for starting new projects!
+This contains scripts to set up a database using Postgres and sets up a server to connect the database and backend.
 
 ## Set up
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+Clone this repository to your local machine git clone tabletop-bartender-server
+cd into the cloned repository
+Make a fresh start of the git history for this project with rm -rf .git && git init
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+Install the node dependencies `npm install`
+
+Create a database to create tables in using Postgres.
+Sample script:
+ - psql CREATE DATABASE database_name
+ 
+Create .env file in the main path folder and add DATABASE_URL="postgresql://username@localhost/database_name" to path the server to the correct database.
+
+From here, you can run `npm run migrate`, and it will create tables inside the database you created.
+
+To seed the table, you must run the command "psql -U username -d database_name -f ./seed/seed.tabletop_bartender.sql"
+
+This finishes the set up of the database on the local server.
 
 ## Scripts
-
-Start the application `npm start`
-
-Start nodemon for the application `npm run dev`
+Start the server with `npm run dev`
 
 Run the tests `npm test`
 

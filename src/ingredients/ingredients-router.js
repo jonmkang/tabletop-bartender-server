@@ -14,12 +14,6 @@ ingredientsRouter
                 res.json(ingredients)
             })
             .catch(next)
-    // .post(bodyParser, (req, res) => {
-    //     const db = req.app.get('db')
-    //     const { title } = req.body;
-
-
-    // })
 })
 
 module.exports = ingredientsRouter;

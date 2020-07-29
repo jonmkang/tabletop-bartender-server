@@ -31,7 +31,7 @@ Run the tests `npm test`
 When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
 
 
-##API Documentation
+## API Documentation
 
 There are four routes for this API:
 * /cocktails
@@ -40,18 +40,18 @@ There are four routes for this API:
 * /users
 * /auth
 
-###/cocktails route
+### /cocktails route
 When a GET request is made, it will return all cocktails in the database.
 When a post request is made, it will clear all cross scripting problems and add the cocktail to the database.
 
-###/ingredients route
+### /ingredients route
 When a GET request is made, it will return all ingredients in the database.
 
-###/flavors route
+### /flavors route
 When a GET request is made, it will return all flavors in the database.
 
-###/users route
+### /users route
 When a POST request is made, it will add the user's information to the database given all the required fields are filled in and abide by the password requirements.  Passwords are encrypted before adding it to the database. This will allow the user to add cocktails to the database when logged in.
 
-###/auth/login route
+### /auth/login route
 When a POST request is made, it validates the user's email and password and checks to see if there exists a user with the same hashed password in the database.  If the request made is okay, an authToken is sent back to the user allowing them to access the addCocktail page.

@@ -4,8 +4,8 @@ This contains scripts to set up a database using Postgres and sets up a server t
 
 ## Set up
 
-Clone this repository to your local machine git clone tabletop-bartender-server
-cd into the cloned repository
+Clone this repository to your local machine `git clone tabletop-bartender-server`<br>
+cd into the cloned repository <br>
 Make a fresh start of the git history for this project with rm -rf .git && git init
 
 Install the node dependencies `npm install`

@@ -19,7 +19,17 @@ VALUES
     ('Agave'), 
     ('Cherry'), 
     ('Orange Slice'),
-    ('Angostura Bitters');
+    ('Angostura Bitters'),
+    ('Lime'),
+    ('Sweet Vermouth'),
+    ('Dry Vermouth'),
+    ('Campari'),
+    ('Tonic'),
+    ('Club Soda'),
+    ('Elderflower Liquor'),
+    ('Grapefruit Juice'),
+    ('Lemon Juice'),
+    ('Egg Whites');
 
 INSERT INTO flavor_profile(title)
 VALUES

@@ -36,6 +36,7 @@ When your new project is ready for deployment, add a new Heroku application with
 ### /cocktails 
 When a GET request is made, it will return all cocktails in the database.
 When a post request is made, it will clear all cross scripting problems and add the cocktail to the database.
+When a patch request is made, it will update all fields that have been changed and update the cocktail in the database.
 
 ### /ingredients
 When a GET request is made, it will return all ingredients in the database.

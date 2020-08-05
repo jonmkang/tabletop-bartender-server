@@ -28,8 +28,18 @@ const CocktailsService = {
             ingredient4: cocktail.ingredient4,
             ingredient5: cocktail.ingredient5,
             ingredient6: cocktail.ingredient6,
-            flavor: cocktail.flavor
+            flavor: cocktail.flavor,
+            user_id: cocktail.user_id
         }
+    },
+    updateCocktail(db, id, newCocktailFields){
+        return db('cocktails')
+            .where({ id })
+            .update(newCocktailFields)
+            .returning('*')
+            .then(rows => {
+                return rows[0]
+            })
     }
 }
 

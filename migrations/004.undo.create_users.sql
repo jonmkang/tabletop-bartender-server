@@ -1,1 +1,4 @@
-DROP TABLE IF EXISTS users;
+ALTER TABLE cocktails DROP COLUMN user_id;
+
+DROP TABLE IF EXISTS users CASCADE;
+

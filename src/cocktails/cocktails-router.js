@@ -23,7 +23,7 @@ cocktailsRouter
             return
         }
         const db = req.app.get('db')
-        const { title, ingredients, recipe, image, flavor } = req.body;
+        const { title, ingredients, recipe, image, flavor, user_id } = req.body;
         const cocktailToAdd = { title: ''};
         for(let i = 1; i <= ingredients.length; i++){
             cocktailToAdd[`ingredient${i}`] = ingredients[i-1]
@@ -33,6 +33,7 @@ cocktailsRouter
         cocktailToAdd.recipe = xss(recipe);
         cocktailToAdd.image = xss(image);
         cocktailToAdd.flavor = flavor;
+        cocktailToAdd.user_id = parseInt(user_id);
 
         CocktailsService.insertCocktail(
             db,
@@ -44,6 +45,32 @@ cocktailsRouter
                     .json(CocktailsService.serializeCocktail(cocktail))
             })
         return res.status(201)
+    })
+    .patch(bodyParser, (req, res, next) => {
+        const db = req.app.get('db')
+        const { id, title, ingredients, recipe, image, flavor, user_id } = req.body;
+        const cocktailToAdd = { title: ''};
+        for(let i = 1; i <= ingredients.length; i++){
+            cocktailToAdd[`ingredient${i}`] = ingredients[i-1]
+        }
+        
+        cocktailToAdd.title = xss(title);
+        cocktailToAdd.recipe = xss(recipe);
+        cocktailToAdd.image = xss(image);
+        cocktailToAdd.flavor = flavor;
+        cocktailToAdd.user_id = parseInt(user_id);
+
+        CocktailsService.updateCocktail(
+            db,
+            id,
+            cocktailToAdd
+        )
+            .then(cocktail => {
+                res
+                    .status(204)
+                    .json(CocktailsService.serializeCocktail(cocktail))
+            })
+            .catch(next)
     })
 
 module.exports = cocktailsRouter;

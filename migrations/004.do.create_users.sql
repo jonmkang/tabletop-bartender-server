@@ -5,3 +5,6 @@ CREATE TABLE users (
     password TEXT NOT NULL,
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL
 );
+
+ALTER TABLE cocktails
+    ADD COLUMN user_id INTEGER;

@@ -5,4 +5,4 @@ CREATE TABLE flavor_profile (
 );
 
 ALTER TABLE cocktails
-    ADD COLUMN flavor INTEGER REFERENCES flavor_profile(id);
+    ADD COLUMN flavor INTEGER REFERENCES flavor_profile(id) ON DELETE SET NULL;
